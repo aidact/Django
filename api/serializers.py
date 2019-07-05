@@ -1,5 +1,11 @@
 from rest_framework import serializers
 from api.models import Review
+from django.utils import timezone
+
+
+class CompanySerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(required=True)
 
 
 class ReviewSerializer(serializers.Serializer):
@@ -19,3 +25,16 @@ class ReviewSerializer(serializers.Serializer):
         instance.summary = validated_data.get('summary', instance.summary)
         instance.save()
         return instance
+
+
+class ReviewSerializer2(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    rating = serializers.IntegerField(required=True)
+    title = serializers.CharField(required=True)
+    summary = serializers.CharField(required=True)
+    created_at = serializers.DateTimeField(default=timezone.now())
+    company = CompanySerializer()
+
+    class Meta:
+        model = Review
+        fields = ('id', 'rating', 'title', 'summary')

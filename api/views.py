@@ -2,18 +2,18 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from api.models import Review
-from api.serializers import ReviewSerializer
+from api.serializers import ReviewSerializer, ReviewSerializer2
 
 
 @csrf_exempt
 def review_list(request):
     if request.method == 'GET':
         reviews = Review.objects.all()
-        serializer = ReviewSerializer(reviews, many=True)
+        serializer = ReviewSerializer2(reviews, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'POST':
         data = json.loads(request.body)
-        serializer = ReviewSerializer(data=data)
+        serializer = ReviewSerializer2(data=data)
         # review = Review()
         # review.rating = data.get('rating', '')
         # review.title = data.get('title', '')
@@ -27,6 +27,8 @@ def review_list(request):
         return JsonResponse(serializer.errors)
     return JsonResponse({'error': 'bad request'})
 
+
+# reviews = company.review_set.all()
 
 @csrf_exempt
 def review_detail(request, pk):
