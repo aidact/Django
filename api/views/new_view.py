@@ -3,15 +3,22 @@ from api.models import Review
 from api.serializers import ReviewSerializer2, UserSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class ReviewList(APIView):
+    permission_class = (IsAuthenticated,)
+
     def get(self, request):
-        reviews = Review.objects.all()
+        if request.user.id == 1:
+            reviews = Review.objects.all()
+            serializer = ReviewSerializer2(reviews, many=True)
+            return Response(serializer.data)
+        reviews = Review.objects.filter(created_by=request.user)
         serializer = ReviewSerializer2(reviews, many=True)
         return Response(serializer.data)
 
-    def post(self):
+    def post(self, request):
         serializer = ReviewSerializer2(data=request.data)
         if serializer.is_valid():
             serializer.save()

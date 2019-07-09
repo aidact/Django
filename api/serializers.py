@@ -27,20 +27,23 @@ class ReviewSerializer(serializers.Serializer):
         return instance
 
 
-class ReviewSerializer2(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    rating = serializers.IntegerField(required=True)
-    title = serializers.CharField(required=True)
-    summary = serializers.CharField(required=True)
-    created_at = serializers.DateTimeField()
-    company = CompanySerializer()
-
-    class Meta:
-        model = Review
-        fields = ('id', 'rating', 'title', 'summary', 'created_at', 'company')
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
+
+
+class ReviewSerializer2(serializers.ModelSerializer):
+    # id = serializers.IntegerField(read_only=True)
+    # rating = serializers.IntegerField(required=True)
+    # title = serializers.CharField(required=True)
+    # summary = serializers.CharField(required=True)
+    # created_at = serializers.DateTimeField()
+    # company = CompanySerializer()
+    # created_by = UserSerializer()
+
+    class Meta:
+        model = Review
+        fields = ('id', 'rating', 'title', 'summary', 'created_at', 'company', 'created_by',)
+
+
