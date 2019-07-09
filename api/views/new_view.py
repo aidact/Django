@@ -10,11 +10,10 @@ class ReviewList(APIView):
     permission_class = (IsAuthenticated,)
 
     def get(self, request):
-        if request.user.id == 1:
+        if request.user.is_superuser:
             reviews = Review.objects.all()
-            serializer = ReviewSerializer2(reviews, many=True)
-            return Response(serializer.data)
-        reviews = Review.objects.filter(created_by=request.user)
+        else:
+            reviews = Review.objects.filter(created_by=request.user)
         serializer = ReviewSerializer2(reviews, many=True)
         return Response(serializer.data)
 
