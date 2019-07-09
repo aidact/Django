@@ -2,7 +2,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from api.models import Review
-from api.serializers import ReviewSerializer, ReviewSerializer2
+from api.serializers import ReviewSerializer, ReviewSerializer2, CompanySerializer
 
 
 @csrf_exempt

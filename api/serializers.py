@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from api.models import Review
-from django.utils import timezone
 
 
 class CompanySerializer(serializers.Serializer):
@@ -32,9 +32,15 @@ class ReviewSerializer2(serializers.ModelSerializer):
     rating = serializers.IntegerField(required=True)
     title = serializers.CharField(required=True)
     summary = serializers.CharField(required=True)
-    created_at = serializers.DateTimeField(default=timezone.now())
+    created_at = serializers.DateTimeField()
     company = CompanySerializer()
 
     class Meta:
         model = Review
-        fields = ('id', 'rating', 'title', 'summary')
+        fields = ('id', 'rating', 'title', 'summary', 'created_at', 'company')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
