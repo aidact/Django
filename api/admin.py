@@ -2,12 +2,10 @@ from django.contrib import admin
 from api.models import Company, Review
 
 
-#admin.site.register(Company)
-#admin.site.register(Review)
-
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
+
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):

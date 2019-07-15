@@ -1,16 +1,13 @@
 from django.test import TestCase
 from api.models import Review, Company
 from rest_framework.test import APIClient
-from django.urls import reverse
 from django.contrib.auth.models import User
 
 client = APIClient()
 TEST_USER = 'admin2'
-
 REVIEW_RATING = 4
 REVIEW_TITLE = 'Good'
 REVIEW_SUMMARY = 'Good'
-
 COMPANY_NAME = 'Company 3'
 
 
@@ -40,7 +37,8 @@ class ReviewModelTest(BaseTest):
         self.assertEqual(review.created_by, self.user)
 
     def test_str(self):
-        self.assertEqual(self.review.__str__(), '{}: {} {} {}'.format(self.review.id, self.review.rating, self.review.title, self.review.summary))
+        self.assertEqual(self.review.__str__(), '{}: {} {} {}'.format(self.review.id, self.review.rating,
+                                                                      self.review.title, self.review.summary))
 
 
 class CompanyModelTest(BaseTest):
@@ -50,4 +48,3 @@ class CompanyModelTest(BaseTest):
 
     def test_str(self):
         self.assertEqual(self.company.__str__(), '{}: {}'.format(self.company.id, self.company.name))
-
