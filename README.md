@@ -15,5 +15,6 @@ pip install djangorestframework
 ## Usage
 
 ```python
-python manage.pu runserver
+Python 3.7
+ENV
 ```
