@@ -1,7 +1,7 @@
 # Review_Blog
 
-Review_Blog is an API that allows users to post and retrieve their reviews.\n
-Users are allowed to rate companies and write summaries.\n
+Review_Blog is an API that allows users to post and retrieve their reviews.<br />
+Users are allowed to rate companies and write summaries.<br />
 Admin can browse all reviews.
 
 ## Installation
